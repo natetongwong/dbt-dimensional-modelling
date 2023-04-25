@@ -1,0 +1,364 @@
+{
+  "id" : "dim_address",
+  "metainfo" : {
+    "label" : "dim_address",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "stg_address##UcZKc2op" : {
+      "id" : "stg_address##UcZKc2op",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "stg_address",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "address",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "ATNecfEE",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "addressid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "addressline1",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "addressline2",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "city",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "stateprovinceid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "postalcode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "spatiallocation",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "rowguid",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "stg_stateprovince##Y8Zama0C" : {
+      "id" : "stg_stateprovince##Y8Zama0C",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "stg_stateprovince",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "stateprovince",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "T12D1n11",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "stateprovinceid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "countryregioncode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "rowguid",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "name",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "territoryid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "isonlystateprovinceflag",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "stateprovincecode",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "stg_countryregion##bZWR2GFb" : {
+      "id" : "stg_countryregion##bZWR2GFb",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "stg_countryregion",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "countryregion",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "ktZMC1oK",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "countryregioncode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "name",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "dim_address##dPvklGSg" : {
+      "id" : "dim_address##dPvklGSg",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "dim_address",
+        "phase" : 0,
+        "macroDependencies" : [ "dbt_utils.generate_surrogate_key" ]
+      },
+      "properties" : {
+        "customQueryDisabled" : false,
+        "customQuery" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT \n  {{ dbt_utils.generate_surrogate_key(['stg_address.addressid']) }} AS address_key,\n  stg_address.addressid,\n  stg_address.city AS city_name,\n  stg_stateprovince.name AS state_name,\n  stg_countryregion.name AS country_name\n\nFROM stg_address\nLEFT JOIN stg_stateprovince\n   ON stg_address.stateprovinceid = stg_stateprovince.stateprovinceid\nLEFT JOIN stg_countryregion\n   ON stg_stateprovince.countryregioncode = stg_countryregion.countryregioncode\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Ipsn2tZj",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "addressid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "addressline1",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "addressline2",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "city",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "stateprovinceid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "postalcode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "spatiallocation",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "rowguid",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "stg_address"
+        }, {
+          "id" : "V3dIwooR",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "stateprovinceid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "countryregioncode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "rowguid",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "name",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "territoryid",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "isonlystateprovinceflag",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "stateprovincecode",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "stg_stateprovince"
+        }, {
+          "id" : "vKqTINNj",
+          "schema" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "countryregioncode",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "modifieddate",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "name",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "stg_countryregion"
+        } ],
+        "outputs" : [ {
+          "id" : "K3o2hSUK",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "XdTgsdln",
+    "source" : "stg_address##UcZKc2op",
+    "sourcePort" : "ATNecfEE",
+    "target" : "dim_address##dPvklGSg",
+    "targetPort" : "Ipsn2tZj"
+  }, {
+    "id" : "Wvtz2DcB",
+    "source" : "stg_stateprovince##Y8Zama0C",
+    "sourcePort" : "T12D1n11",
+    "target" : "dim_address##dPvklGSg",
+    "targetPort" : "V3dIwooR"
+  }, {
+    "id" : "naIlwjO7",
+    "source" : "stg_countryregion##bZWR2GFb",
+    "sourcePort" : "ktZMC1oK",
+    "target" : "dim_address##dPvklGSg",
+    "targetPort" : "vKqTINNj"
+  } ],
+  "component" : "Model"
+}
