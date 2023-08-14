@@ -1,0 +1,115 @@
+{
+  "id" : "fct_sales",
+  "metainfo" : {
+    "label" : "fct_sales",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "stg_salesorderheader##AjrcLFqA" : {
+      "id" : "stg_salesorderheader##AjrcLFqA",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "stg_salesorderheader",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT \n  salesorderid,\n  customerid,\n  creditcardid,\n  shiptoaddressid,\n  status AS order_status,\n  CAST(orderdate AS date) AS orderdate\n\nFROM {{ ref('salesorderheader')}}\n"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "ZOHiUAN4",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "stg_salesorderdetail##bEt3NDmK" : {
+      "id" : "stg_salesorderdetail##bEt3NDmK",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "stg_salesorderdetail",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT \n  salesorderid,\n  salesorderdetailid,\n  productid,\n  orderqty,\n  unitprice,\n  unitprice * orderqty AS revenue\n\nFROM {{ ref('salesorderdetail')}}\n"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "YJYF5rnQ",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "fct_sales##i7Qrzi1j" : {
+      "id" : "fct_sales##i7Qrzi1j",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "fct_sales",
+        "phase" : 0,
+        "macroDependencies" : [ "dbt_utils.generate_surrogate_key" ]
+      },
+      "properties" : {
+        "customQueryDisabled" : false,
+        "customQuery" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT \n  {{ dbt_utils.generate_surrogate_key(['stg_salesorderdetail.salesorderid', 'salesorderdetailid']) }} AS sales_key,\n  {{ dbt_utils.generate_surrogate_key(['productid']) }} AS product_key,\n  {{ dbt_utils.generate_surrogate_key(['customerid']) }} AS customer_key,\n  {{ dbt_utils.generate_surrogate_key(['creditcardid']) }} AS creditcard_key,\n  {{ dbt_utils.generate_surrogate_key(['shiptoaddressid']) }} AS ship_address_key,\n  {{ dbt_utils.generate_surrogate_key(['order_status']) }} AS order_status_key,\n  {{ dbt_utils.generate_surrogate_key(['orderdate']) }} AS order_date_key,\n  stg_salesorderdetail.salesorderid,\n  stg_salesorderdetail.salesorderdetailid,\n  stg_salesorderdetail.unitprice,\n  stg_salesorderdetail.orderqty,\n  stg_salesorderdetail.revenue\n\nFROM stg_salesorderdetail\nINNER JOIN stg_salesorderheader\n   ON stg_salesorderdetail.salesorderid = stg_salesorderheader.salesorderid\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "nHQ4hylh",
+          "slug" : "stg_salesorderdetail"
+        }, {
+          "id" : "yK63Vu5C",
+          "slug" : "stg_salesorderheader"
+        } ],
+        "outputs" : [ {
+          "id" : "nnziAzQh",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "KfUmQIlh",
+    "source" : "stg_salesorderdetail##bEt3NDmK",
+    "sourcePort" : "YJYF5rnQ",
+    "target" : "fct_sales##i7Qrzi1j",
+    "targetPort" : "nHQ4hylh"
+  }, {
+    "id" : "mdzLz6B9",
+    "source" : "stg_salesorderheader##AjrcLFqA",
+    "sourcePort" : "ZOHiUAN4",
+    "target" : "fct_sales##i7Qrzi1j",
+    "targetPort" : "yK63Vu5C"
+  } ],
+  "component" : "Model"
+}

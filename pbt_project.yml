@@ -1,0 +1,669 @@
+name: adventureworks
+description: ''
+version: 0.0.1
+author: null
+language: sql
+buildSystem: ''
+buildSystemDetails: null
+pipelines: {}
+datasets: {}
+templates: {}
+jobs: {}
+functions:
+  author: null
+  createdAt: '2023-08-14 10:09:57'
+  gems: {}
+  udfs: {}
+  udafs: {}
+  expressions: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/fct_sales:
+    name: fct_sales
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/fct_sales.sql
+    - .prophecy/ide/models/fct_sales.json
+    - models/marts/fct_sales.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_order_status:
+    name: dim_order_status
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_order_status.sql
+    - .prophecy/ide/models/dim_order_status.json
+    - models/marts/dim_order_status.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_customer:
+    name: dim_customer
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_customer.sql
+    - .prophecy/ide/models/dim_customer.json
+    - models/marts/dim_customer.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/obt_sales:
+    name: obt_sales
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/obt_sales.sql
+    - .prophecy/ide/models/obt_sales.json
+    - models/marts/obt_sales.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_address:
+    name: dim_address
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_address.sql
+    - .prophecy/ide/models/dim_address.json
+    - models/marts/dim_address.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_product:
+    name: dim_product
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_product.sql
+    - .prophecy/ide/models/dim_product.json
+    - models/marts/dim_product.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_date:
+    name: dim_date
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_date.sql
+    - .prophecy/ide/models/dim_date.json
+    - models/marts/dim_date.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlmodels/dim_credit_card:
+    name: dim_credit_card
+    schema: null
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/marts/dim_credit_card.sql
+    - .prophecy/ide/models/dim_credit_card.json
+    - models/marts/dim_credit_card.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-14 10:09:58'
+sqlMacros:
+  .prophecy/metadata/sqlmacros/generate_schema_name:
+    name: generate_schema_name
+    macroType: expression
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - macros/override_default_schema_name.sql
+    createdAt: '2023-08-14 10:09:58'
+sqlSeeds:
+  .prophecy/metadata/sqlseeds/store:
+    name: store
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: businessentityid
+        dataType:
+          type: Number
+      - name: storename
+        dataType:
+          type: String
+      - name: salespersonid
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/store.csv
+    - seeds/sales/store.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/salesorderdetail:
+    name: salesorderdetail
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: salesorderid
+        dataType:
+          type: Number
+      - name: orderqty
+        dataType:
+          type: Number
+      - name: salesorderdetailid
+        dataType:
+          type: Number
+      - name: unitprice
+        dataType:
+          type: Float
+      - name: specialofferid
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: rowguid
+        dataType:
+          type: String
+      - name: productid
+        dataType:
+          type: Number
+      - name: unitpricediscount
+        dataType:
+          type: Number
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/salesorderdetail.csv
+    - seeds/sales/salesorderdetail.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/stateprovince:
+    name: stateprovince
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: stateprovinceid
+        dataType:
+          type: Number
+      - name: countryregioncode
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: rowguid
+        dataType:
+          type: String
+      - name: name
+        dataType:
+          type: String
+      - name: territoryid
+        dataType:
+          type: Number
+      - name: isonlystateprovinceflag
+        dataType:
+          type: String
+      - name: stateprovincecode
+        dataType:
+          type: String
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/person/stateprovince.csv
+    - seeds/person/stateprovince.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/customer:
+    name: customer
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: customerid
+        dataType:
+          type: Number
+      - name: personid
+        dataType:
+          type: String
+      - name: storeid
+        dataType:
+          type: Number
+      - name: territoryid
+        dataType:
+          type: Number
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/customer.csv
+    - seeds/sales/customer.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/date:
+    name: date
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: date_day
+        dataType:
+          type: Date
+      - name: prior_date_day
+        dataType:
+          type: Date
+      - name: next_date_day
+        dataType:
+          type: Date
+      - name: prior_year_date_day
+        dataType:
+          type: Date
+      - name: prior_year_over_year_date_day
+        dataType:
+          type: Date
+      - name: day_of_week
+        dataType:
+          type: Number
+      - name: day_of_week_name
+        dataType:
+          type: String
+      - name: day_of_month
+        dataType:
+          type: Number
+      - name: day_of_year
+        dataType:
+          type: Number
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/date/date.csv
+    - seeds/date/date.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/creditcard:
+    name: creditcard
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: creditcardid
+        dataType:
+          type: Number
+      - name: cardtype
+        dataType:
+          type: String
+      - name: expyear
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: expmonth
+        dataType:
+          type: Number
+      - name: cardnumber
+        dataType:
+          type: Float
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/creditcard.csv
+    - seeds/sales/creditcard.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/address:
+    name: address
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: addressid
+        dataType:
+          type: Number
+      - name: addressline1
+        dataType:
+          type: String
+      - name: addressline2
+        dataType:
+          type: String
+      - name: city
+        dataType:
+          type: String
+      - name: stateprovinceid
+        dataType:
+          type: Number
+      - name: postalcode
+        dataType:
+          type: String
+      - name: spatiallocation
+        dataType:
+          type: String
+      - name: rowguid
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/person/address.csv
+    - seeds/person/address.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/countryregion:
+    name: countryregion
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: countryregioncode
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: name
+        dataType:
+          type: String
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/person/countryregion.csv
+    - seeds/person/countryregion.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/salesorderheader:
+    name: salesorderheader
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: salesorderid
+        dataType:
+          type: Number
+      - name: shipmethodid
+        dataType:
+          type: Number
+      - name: billtoaddressid
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: rowguid
+        dataType:
+          type: String
+      - name: taxamt
+        dataType:
+          type: Float
+      - name: shiptoaddressid
+        dataType:
+          type: Number
+      - name: onlineorderflag
+        dataType:
+          type: String
+      - name: territoryid
+        dataType:
+          type: Number
+      - name: status
+        dataType:
+          type: Number
+      - name: orderdate
+        dataType:
+          type: Date
+      - name: creditcardapprovalcode
+        dataType:
+          type: String
+      - name: subtotal
+        dataType:
+          type: Float
+      - name: creditcardid
+        dataType:
+          type: Number
+      - name: currencyrateid
+        dataType:
+          type: String
+      - name: revisionnumber
+        dataType:
+          type: Number
+      - name: freight
+        dataType:
+          type: Float
+      - name: duedate
+        dataType:
+          type: Date
+      - name: totaldue
+        dataType:
+          type: Float
+      - name: customerid
+        dataType:
+          type: Number
+      - name: salespersonid
+        dataType:
+          type: Number
+      - name: shipdate
+        dataType:
+          type: Date
+      - name: accountnumber
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/salesorderheader.csv
+    - seeds/sales/salesorderheader.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/product:
+    name: product
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: productid
+        dataType:
+          type: Number
+      - name: name
+        dataType:
+          type: String
+      - name: safetystocklevel
+        dataType:
+          type: Number
+      - name: finishedgoodsflag
+        dataType:
+          type: String
+      - name: class
+        dataType:
+          type: String
+      - name: makeflag
+        dataType:
+          type: String
+      - name: productnumber
+        dataType:
+          type: String
+      - name: reorderpoint
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: rowguid
+        dataType:
+          type: String
+      - name: productmodelid
+        dataType:
+          type: String
+      - name: weightunitmeasurecode
+        dataType:
+          type: String
+      - name: standardcost
+        dataType:
+          type: Number
+      - name: productsubcategoryid
+        dataType:
+          type: String
+      - name: listprice
+        dataType:
+          type: Number
+      - name: daystomanufacture
+        dataType:
+          type: Number
+      - name: productline
+        dataType:
+          type: String
+      - name: color
+        dataType:
+          type: String
+      - name: sellstartdate
+        dataType:
+          type: Date
+      - name: weight
+        dataType:
+          type: String
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/production/product.csv
+    - seeds/production/product.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/productsubcategory:
+    name: productsubcategory
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: productsubcategoryid
+        dataType:
+          type: Number
+      - name: productcategoryid
+        dataType:
+          type: Number
+      - name: name
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/production/productsubcategory.csv
+    - seeds/production/productsubcategory.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/salesreason:
+    name: salesreason
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: salesreasonid
+        dataType:
+          type: Number
+      - name: name
+        dataType:
+          type: String
+      - name: reasontype
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/salesreason.csv
+    - seeds/sales/salesreason.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/productcategory:
+    name: productcategory
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: productcategoryid
+        dataType:
+          type: Number
+      - name: name
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/production/productcategory.csv
+    - seeds/production/productcategory.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/salesorderheadersalesreason:
+    name: salesorderheadersalesreason
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: salesorderid
+        dataType:
+          type: Number
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: salesreasonid
+        dataType:
+          type: Number
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/sales/salesorderheadersalesreason.csv
+    - seeds/sales/salesorderheadersalesreason.yml
+    createdAt: '2023-08-14 10:09:58'
+  .prophecy/metadata/sqlseeds/person:
+    name: person
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: businessentityid
+        dataType:
+          type: Number
+      - name: title
+        dataType:
+          type: String
+      - name: firstname
+        dataType:
+          type: String
+      - name: middlename
+        dataType:
+          type: String
+      - name: lastname
+        dataType:
+          type: String
+      - name: persontype
+        dataType:
+          type: String
+      - name: namestyle
+        dataType:
+          type: String
+      - name: suffix
+        dataType:
+          type: String
+      - name: modifieddate
+        dataType:
+          type: Date
+      - name: rowguid
+        dataType:
+          type: String
+      - name: emailpromotion
+        dataType:
+          type: Number
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - seeds/person/person.csv
+    - seeds/person/person.yml
+    createdAt: '2023-08-14 10:09:58'
+sqlSources: {}
+sqlUnreferencedSources: {}
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: nathan@prophecy.io
+  createdAt: '2023-08-14 10:09:57'
+dependencies: '[]'
+projectDependencies: {}
+pipelineConfigurations: {}

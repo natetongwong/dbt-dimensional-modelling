@@ -1,0 +1,264 @@
+{
+  "id" : "obt_sales",
+  "metainfo" : {
+    "label" : "obt_sales",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "obt_sales##pndWXllA" : {
+      "id" : "obt_sales##pndWXllA",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "obt_sales",
+        "phase" : 0,
+        "macroDependencies" : [ "dbt_utils.star" ]
+      },
+      "properties" : {
+        "customQueryDisabled" : false,
+        "customQuery" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT \n  {{ dbt_utils.star(from =  ref('fct_sales'), relation_alias = 'f_sales', except = [\"product_key\", \"customer_key\", \"creditcard_key\", \"ship_address_key\", \"order_status_key\", \"order_date_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_product'), relation_alias = 'd_product', except = [\"product_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_customer'), relation_alias = 'd_customer', except = [\"customer_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_credit_card'), relation_alias = 'd_credit_card', except = [\"creditcard_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_address'), relation_alias = 'd_address', except = [\"address_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_order_status'), relation_alias = 'd_order_status', except = [\"order_status_key\"]) }},\n  {{ dbt_utils.star(from =  ref('dim_date'), relation_alias = 'd_date', except = [\"date_key\"]) }}\n\nFROM f_sales\nLEFT JOIN d_product\n   ON f_sales.product_key = d_product.product_key\nLEFT JOIN d_customer\n   ON f_sales.customer_key = d_customer.customer_key\nLEFT JOIN d_credit_card\n   ON f_sales.creditcard_key = d_credit_card.creditcard_key\nLEFT JOIN d_address\n   ON f_sales.ship_address_key = d_address.address_key\nLEFT JOIN d_order_status\n   ON f_sales.order_status_key = d_order_status.order_status_key\nLEFT JOIN d_date\n   ON f_sales.order_date_key = d_date.date_key\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "VQytF5OK",
+          "slug" : "f_sales"
+        }, {
+          "id" : "GzIXuoXN",
+          "slug" : "d_product"
+        }, {
+          "id" : "U5LuigBT",
+          "slug" : "d_customer"
+        }, {
+          "id" : "ilu9hrBv",
+          "slug" : "d_credit_card"
+        }, {
+          "id" : "jYBSacNP",
+          "slug" : "d_address"
+        }, {
+          "id" : "XGlzVL6B",
+          "slug" : "d_order_status"
+        }, {
+          "id" : "urwbxXT6",
+          "slug" : "d_date"
+        } ],
+        "outputs" : [ {
+          "id" : "xZOUgQ34",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_credit_card##paCynH0z" : {
+      "id" : "d_credit_card##paCynH0z",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_credit_card",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_credit_card",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "plSdYTUz",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_order_status##lZwo5vbQ" : {
+      "id" : "d_order_status##lZwo5vbQ",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_order_status",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_order_status",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "YKmaGGr6",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_address##BLw9E8ju" : {
+      "id" : "d_address##BLw9E8ju",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_address",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_address",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "X3GULKVU",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_product##f1HzNMkO" : {
+      "id" : "d_product##f1HzNMkO",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_product",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_product",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Hf4Su7hh",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_date##EQtSYbgS" : {
+      "id" : "d_date##EQtSYbgS",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_date",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_date",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TM4ttJ1I",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "f_sales##DlhLAsN8" : {
+      "id" : "f_sales##DlhLAsN8",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "f_sales",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "fct_sales",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "SWBnFqQK",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "d_customer##l6qyCV4N" : {
+      "id" : "d_customer##l6qyCV4N",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "d_customer",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "dim_customer",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "MpFVrsCb",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "T5CevZMC",
+    "source" : "f_sales##DlhLAsN8",
+    "sourcePort" : "SWBnFqQK",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "VQytF5OK"
+  }, {
+    "id" : "mihBmSaG",
+    "source" : "d_product##f1HzNMkO",
+    "sourcePort" : "Hf4Su7hh",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "GzIXuoXN"
+  }, {
+    "id" : "b8TM21P1",
+    "source" : "d_customer##l6qyCV4N",
+    "sourcePort" : "MpFVrsCb",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "U5LuigBT"
+  }, {
+    "id" : "BYqbkUhm",
+    "source" : "d_credit_card##paCynH0z",
+    "sourcePort" : "plSdYTUz",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "ilu9hrBv"
+  }, {
+    "id" : "wkRoKmUr",
+    "source" : "d_address##BLw9E8ju",
+    "sourcePort" : "X3GULKVU",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "jYBSacNP"
+  }, {
+    "id" : "CRA1tCaI",
+    "source" : "d_order_status##lZwo5vbQ",
+    "sourcePort" : "YKmaGGr6",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "XGlzVL6B"
+  }, {
+    "id" : "RrclBFCK",
+    "source" : "d_date##EQtSYbgS",
+    "sourcePort" : "TM4ttJ1I",
+    "target" : "obt_sales##pndWXllA",
+    "targetPort" : "urwbxXT6"
+  } ],
+  "component" : "Model"
+}
