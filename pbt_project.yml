@@ -135,17 +135,17 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/store:
     name: store
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: businessentityid
         dataType:
-          type: Number
+          type: Integer
       - name: storename
         dataType:
           type: String
       - name: salespersonid
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
@@ -158,23 +158,23 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/salesorderdetail:
     name: salesorderdetail
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: salesorderid
         dataType:
-          type: Number
+          type: Integer
       - name: orderqty
         dataType:
-          type: Number
+          type: Integer
       - name: salesorderdetailid
         dataType:
-          type: Number
+          type: Integer
       - name: unitprice
         dataType:
-          type: Float
+          type: DoublePrecision
       - name: specialofferid
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
@@ -183,10 +183,10 @@ sqlSeeds:
           type: String
       - name: productid
         dataType:
-          type: Number
+          type: Integer
       - name: unitpricediscount
         dataType:
-          type: Number
+          type: Integer
     description: null
     author: nathan@prophecy.io
     files:
@@ -196,11 +196,11 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/stateprovince:
     name: stateprovince
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: stateprovinceid
         dataType:
-          type: Number
+          type: Integer
       - name: countryregioncode
         dataType:
           type: String
@@ -215,7 +215,7 @@ sqlSeeds:
           type: String
       - name: territoryid
         dataType:
-          type: Number
+          type: Integer
       - name: isonlystateprovinceflag
         dataType:
           type: String
@@ -231,20 +231,20 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/customer:
     name: customer
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: customerid
         dataType:
-          type: Number
+          type: Integer
       - name: personid
         dataType:
           type: String
       - name: storeid
         dataType:
-          type: Number
+          type: Integer
       - name: territoryid
         dataType:
-          type: Number
+          type: Integer
     description: null
     author: nathan@prophecy.io
     files:
@@ -254,7 +254,7 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/date:
     name: date
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: date_day
         dataType:
@@ -273,16 +273,16 @@ sqlSeeds:
           type: Date
       - name: day_of_week
         dataType:
-          type: Number
+          type: Integer
       - name: day_of_week_name
         dataType:
           type: String
       - name: day_of_month
         dataType:
-          type: Number
+          type: Integer
       - name: day_of_year
         dataType:
-          type: Number
+          type: Integer
     description: null
     author: nathan@prophecy.io
     files:
@@ -292,26 +292,26 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/creditcard:
     name: creditcard
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: creditcardid
         dataType:
-          type: Number
+          type: Integer
       - name: cardtype
         dataType:
           type: String
       - name: expyear
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
       - name: expmonth
         dataType:
-          type: Number
+          type: Integer
       - name: cardnumber
         dataType:
-          type: Float
+          type: DoublePrecision
     description: null
     author: nathan@prophecy.io
     files:
@@ -321,11 +321,11 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/address:
     name: address
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: addressid
         dataType:
-          type: Number
+          type: Integer
       - name: addressline1
         dataType:
           type: String
@@ -337,7 +337,7 @@ sqlSeeds:
           type: String
       - name: stateprovinceid
         dataType:
-          type: Number
+          type: Integer
       - name: postalcode
         dataType:
           type: String
@@ -359,7 +359,7 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/countryregion:
     name: countryregion
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: countryregioncode
         dataType:
@@ -379,17 +379,17 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/salesorderheader:
     name: salesorderheader
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: salesorderid
         dataType:
-          type: Number
+          type: Integer
       - name: shipmethodid
         dataType:
-          type: Number
+          type: Integer
       - name: billtoaddressid
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
@@ -398,19 +398,19 @@ sqlSeeds:
           type: String
       - name: taxamt
         dataType:
-          type: Float
+          type: DoublePrecision
       - name: shiptoaddressid
         dataType:
-          type: Number
+          type: Integer
       - name: onlineorderflag
         dataType:
           type: String
       - name: territoryid
         dataType:
-          type: Number
+          type: Integer
       - name: status
         dataType:
-          type: Number
+          type: Integer
       - name: orderdate
         dataType:
           type: Date
@@ -419,31 +419,31 @@ sqlSeeds:
           type: String
       - name: subtotal
         dataType:
-          type: Float
+          type: DoublePrecision
       - name: creditcardid
         dataType:
-          type: Number
+          type: Integer
       - name: currencyrateid
         dataType:
           type: String
       - name: revisionnumber
         dataType:
-          type: Number
+          type: Integer
       - name: freight
         dataType:
-          type: Float
+          type: DoublePrecision
       - name: duedate
         dataType:
           type: Date
       - name: totaldue
         dataType:
-          type: Float
+          type: DoublePrecision
       - name: customerid
         dataType:
-          type: Number
+          type: Integer
       - name: salespersonid
         dataType:
-          type: Number
+          type: Integer
       - name: shipdate
         dataType:
           type: Date
@@ -459,17 +459,17 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/product:
     name: product
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: productid
         dataType:
-          type: Number
+          type: Integer
       - name: name
         dataType:
           type: String
       - name: safetystocklevel
         dataType:
-          type: Number
+          type: Integer
       - name: finishedgoodsflag
         dataType:
           type: String
@@ -484,7 +484,7 @@ sqlSeeds:
           type: String
       - name: reorderpoint
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
@@ -499,16 +499,16 @@ sqlSeeds:
           type: String
       - name: standardcost
         dataType:
-          type: Number
+          type: Integer
       - name: productsubcategoryid
         dataType:
           type: String
       - name: listprice
         dataType:
-          type: Number
+          type: Integer
       - name: daystomanufacture
         dataType:
-          type: Number
+          type: Integer
       - name: productline
         dataType:
           type: String
@@ -530,14 +530,14 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/productsubcategory:
     name: productsubcategory
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: productsubcategoryid
         dataType:
-          type: Number
+          type: Integer
       - name: productcategoryid
         dataType:
-          type: Number
+          type: Integer
       - name: name
         dataType:
           type: String
@@ -553,11 +553,11 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/salesreason:
     name: salesreason
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: salesreasonid
         dataType:
-          type: Number
+          type: Integer
       - name: name
         dataType:
           type: String
@@ -576,11 +576,11 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/productcategory:
     name: productcategory
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: productcategoryid
         dataType:
-          type: Number
+          type: Integer
       - name: name
         dataType:
           type: String
@@ -596,17 +596,17 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/salesorderheadersalesreason:
     name: salesorderheadersalesreason
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: salesorderid
         dataType:
-          type: Number
+          type: Integer
       - name: modifieddate
         dataType:
           type: Date
       - name: salesreasonid
         dataType:
-          type: Number
+          type: Integer
     description: null
     author: nathan@prophecy.io
     files:
@@ -616,11 +616,11 @@ sqlSeeds:
   .prophecy/metadata/sqlseeds/person:
     name: person
     schema:
-      providerType: Snowflake
+      providerType: Redshift
       fields:
       - name: businessentityid
         dataType:
-          type: Number
+          type: Integer
       - name: title
         dataType:
           type: String
@@ -650,7 +650,7 @@ sqlSeeds:
           type: String
       - name: emailpromotion
         dataType:
-          type: Number
+          type: Integer
     description: null
     author: nathan@prophecy.io
     files:
